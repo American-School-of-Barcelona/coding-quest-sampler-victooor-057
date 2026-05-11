@@ -20,4 +20,28 @@ for line in data[:5]:
 print()
 
 # --- Your code here ---
+print(f"Loaded {len(data)} lines.")
+print("First 5 lines:")
+for line in data[:5]:
+    print("  ", line)
+print()
 
+# --- Your code here ---
+costs = {}
+
+for line in data:
+    company, rest = line.split(": ")
+    category, amount = rest.split()
+    amount = int(amount)
+
+    if company not in costs:
+        costs[company] = 0
+
+    if category in ["Seat", "Meals", "Luggage", "Fee", "Tax"]:
+        costs[company] += amount
+    else:  # Discount or Rebate
+        costs[company] -= amount
+
+answer = min(costs.values())
+
+print(answer)

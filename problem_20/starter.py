@@ -35,3 +35,59 @@ for line in data[:5]:
 print()
 
 # --- Your code here ---
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9},
+    {1, 4, 7},
+    {2, 5, 8},
+    {3, 6, 9},
+    {1, 5, 9},
+    {3, 5, 7}
+]
+
+x_wins = 0
+o_wins = 0
+draws = 0
+
+for line in data:
+    moves = list(map(int, line.split()))
+
+    x_moves = set()
+    o_moves = set()
+
+    winner = None
+
+    for i, move in enumerate(moves):
+
+        if i % 2 == 0:
+            x_moves.add(move)
+
+            for combo in wins:
+                if combo.issubset(x_moves):
+                    winner = "X"
+                    break
+
+        else:
+            o_moves.add(move)
+
+            for combo in wins:
+                if combo.issubset(o_moves):
+                    winner = "O"
+                    break
+
+        if winner:
+            break
+
+    if winner == "X":
+        x_wins += 1
+    elif winner == "O":
+        o_wins += 1
+    else:
+        draws += 1
+
+answer = x_wins * o_wins * draws
+
+print("X wins:", x_wins)
+print("O wins:", o_wins)
+print("Draws:", draws)
+print("Answer:", answer)
